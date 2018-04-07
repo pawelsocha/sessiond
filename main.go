@@ -88,7 +88,6 @@ func (q QueueStats) GetAddress() uint32 {
 		return 0
 	}
 	parsed := ipv4.To4()
-	Log.Infof("Parsed: %#v", parsed)
 	return binary.BigEndian.Uint32(parsed)
 }
 
@@ -138,7 +137,7 @@ func main() {
 	queryEntity := QueueStats{}
 
 	for _, router := range routers {
-		device, err := mikrotik.NewDevice(router.PrivateAddress)
+		device, err := mikrotik.NewDevice(router.PublicAddress)
 		if err != nil {
 			Log.Criticalf("Can't prepare new routeros device. Error: %s", err)
 		}
